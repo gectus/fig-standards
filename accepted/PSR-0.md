@@ -1,47 +1,48 @@
-The following describes the mandatory requirements that must be adhered
-to for autoloader interoperability.
+Ниже описаны обязательные требования, которые должны соблюдаться в
+автозагрузчике для взаимодействия.
 
-Mandatory
----------
+Обязательные
+------------
 
-* A fully-qualified namespace and class must have the following
-  structure `\<Vendor Name>\(<Namespace>\)*<Class Name>`
-* Each namespace must have a top-level namespace ("Vendor Name").
-* Each namespace can have as many sub-namespaces as it wishes.
-* Each namespace separator is converted to a `DIRECTORY_SEPARATOR` when
-  loading from the file system.
-* Each `_` character in the CLASS NAME is converted to a
-  `DIRECTORY_SEPARATOR`. The `_` character has no special meaning in the
-  namespace.
-* The fully-qualified namespace and class is suffixed with `.php` when
-  loading from the file system.
-* Alphabetic characters in vendor names, namespaces, and class names may
-  be of any combination of lower case and upper case.
+* Полностью сформированное пространство имен и класс должны иметь следующую
+  структуру `\<Vendor Name>\(<Namespace>\)*<Class Name>`
+* Каждое пространство имен должно иметь пространство имен верхнего уровня  ("Vendor Name").
+* Каждое пространство имен может содержать столько вложенных пространств имен, 
+  сколько ему необходимо.
+* Каждый разделитель пространств имен преобразуется в `DIRECTORY_SEPARATOR` при 
+  загрузке из файловой системы.
+* Каждый символ `_` в ИМЕНИ КЛАССА преобразуется в `DIRECTORY_SEPARATOR`.
+  Символ `_` не имеет особого значения в пространстве имен.
+* Полностью сформированное пространство имен и класс дополняются `.php` при 
+  загрузке из файловой системы.
+* Буквы в именах поставщиков, пространствах имен, и именах классов могут в любой комбинации
+  строчных и прописных букв.
 
-Examples
---------
+Примеры
+-------
 
 * `\Doctrine\Common\IsolatedClassLoader` => `/path/to/project/lib/vendor/Doctrine/Common/IsolatedClassLoader.php`
 * `\Symfony\Core\Request` => `/path/to/project/lib/vendor/Symfony/Core/Request.php`
 * `\Zend\Acl` => `/path/to/project/lib/vendor/Zend/Acl.php`
 * `\Zend\Mail\Message` => `/path/to/project/lib/vendor/Zend/Mail/Message.php`
 
-Underscores in Namespaces and Class Names
------------------------------------------
+Подчеркивания в Пространствах имен и Именах классов
+---------------------------------------------------
 
 * `\namespace\package\Class_Name` => `/path/to/project/lib/vendor/namespace/package/Class/Name.php`
 * `\namespace\package_name\Class_Name` => `/path/to/project/lib/vendor/namespace/package_name/Class/Name.php`
 
-The standards we set here should be the lowest common denominator for
-painless autoloader interoperability. You can test that you are
-following these standards by utilizing this sample SplClassLoader
-implementation which is able to load PHP 5.3 classes.
+Стандарты установленные здесь должны быть наименьшим общим знаменателем для 
+безболезненного взаимодействия с автозагрузчиком. Вы можете проверить, что вы следуете 
+этим стандартам, используя предложенный пример SplClassLoader, реализующий возможность 
+загружать PHP 5.3 классы.
 
-Example Implementation
-----------------------
 
-Below is an example function to simply demonstrate how the above
-proposed standards are autoloaded.
+Пример реализации
+-----------------
+
+Ниже приведен пример функции, чтобы просто показать, как выше
+предложенные стандарты будут автоматически загружены.
 ```php
 <?php
 
@@ -61,13 +62,13 @@ function autoload($className)
 }
 ```
 
-SplClassLoader Implementation
------------------------------
+Реализация SplClassLoader
+-------------------------
 
-The following gist is a sample SplClassLoader implementation that can
-load your classes if you follow the autoloader interoperability
-standards proposed above. It is the current recommended way to load PHP
-5.3 classes that follow these standards.
+Следующий gist представляет собой пример реализации SplClassLoader, который может
+загружать ваши классы, если вы будете следовать выше предложенным стандартам для 
+автозагрузчика. На данным момент это рекомендованный способ загружать PHP
+5.3 классы, которые следуют этим стандартам.
 
 * [http://gist.github.com/221634](http://gist.github.com/221634)
 
